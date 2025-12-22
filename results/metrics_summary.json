@@ -1,0 +1,8 @@
+{
+  "best_student_model": "PKD-scraped -> FP",
+  "best_accuracy": 0.9735,
+  "best_macro_f1": 0.9626,
+  "teacher_macro_f1": 0.95,
+  "compression_ratio": ">10x",
+  "notes": "PKD achieves near-FinBERT performance with a compact ALBERT student."
+}

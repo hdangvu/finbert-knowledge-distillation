@@ -1,0 +1,4 @@
+temperature,val_macro_f1,test_accuracy,test_macro_f1
+2,0.9712,0.9588,0.9460
+5,0.9630,0.9647,0.9525
+9,0.9719,0.9588,0.9434

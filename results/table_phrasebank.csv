@@ -1,0 +1,6 @@
+model,test_accuracy,test_macro_f1
+Fresh ALBERT -> FP,0.8029,0.5544
+CE-scraped -> FP,0.9529,0.9313
+KD-scraped (T=5) -> FP,0.9647,0.9525
+PKD-scraped -> FP,0.9735,0.9626
+FinBERT (Teacher),0.9765,0.95

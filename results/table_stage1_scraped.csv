@@ -1,0 +1,6 @@
+model,test_accuracy,test_macro_f1
+CE-scraped,0.9316,0.9291
+KD-scraped (T=2),0.9341,0.9332
+KD-scraped (T=5),0.9382,0.9368
+KD-scraped (T=9),0.9366,0.9362
+PKD-scraped,0.9407,0.9394
