@@ -1,0 +1,17 @@
+# data / models
+data/
+checkpoints/
+*.pt
+*.bin
+*.safetensors
+
+# notebooks
+.ipynb_checkpoints/
+
+# python junk
+__pycache__/
+*.pyc
+
+# logs
+wandb/
+runs/
