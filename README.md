@@ -1,5 +1,10 @@
 # Efficient Financial Sentiment Modeling via Knowledge Distillation
 
+**TL;DR:** Patient Knowledge Distillation (PKD) transfers FinBERT’s financial
+sentiment capability to a compact ALBERT model, achieving **0.9626 macro-F1**
+on Financial PhraseBank with **>10× model compression** and no inference
+slowdown.
+
 This repository presents an empirical study on transferring financial sentiment
 classification capability from a large **FinBERT** teacher model to a compact
 **ALBERT** student using **Knowledge Distillation (KD)** and
@@ -53,6 +58,9 @@ model size, enabling efficient deployment in resource-constrained settings.
 **PKD-scraped → FP** achieves the strongest performance among student models,
 closely matching FinBERT while using a much smaller architecture.
 
+All numerical results reported above are available as CSV/JSON files in
+the `results/` directory for transparency and reuse.
+
 ---
 
 ## Confusion Matrix Analysis
@@ -74,9 +82,10 @@ particularly improving recall for the minority *neutral* class.
 - **ALBERT students:** 11.7M parameters (~44.6 MB)  
 - **Compression:** >10× reduction in model size  
 
-Despite similar inference latency per document, distillation substantially
-improves the effectiveness of the compact student without increasing
-computational cost.
+Despite similar inference latency per document across ALBERT variants,
+knowledge distillation substantially improves predictive performance **without
+any increase in inference cost**, making PKD particularly attractive for
+deployment under tight resource constraints.
 
 ---
 
@@ -124,6 +133,7 @@ knowledge transfer beyond hard-label supervision.
 
 ## Note on Reproducibility
 
-All experiments were conducted in Google Colab.
-This repository archives final results and configuration details and
-provides code structure for reproducibility in a fresh environment.
+The repository provides configuration summaries and result artifacts.
+Scripts for reproducing experiments can be added incrementally; the
+original end-to-end experimental pipeline is fully documented in
+`notebooks/pipeline.ipynb`.
