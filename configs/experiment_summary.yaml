@@ -1,0 +1,25 @@
+teacher: ProsusAI/finbert
+student: albert-base-v2
+task: 3-class sentiment (negative, neutral, positive)
+max_sequence_length: 128
+
+stage1:
+  dataset: pseudo-labeled scraped financial news
+  train/val/test: 5587 / 1197 / 1198
+  epochs: 3
+  batch_size: 32
+  optimizer: AdamW
+  learning_rate: 2e-5
+  alpha: 0.3
+  temperatures: [2, 5, 9]
+
+stage2:
+  dataset: Financial PhraseBank (100% agreement)
+  train/val/test: 1584 / 340 / 340
+  epochs: 1
+  loss: cross-entropy
+
+pkd:
+  beta: 0.02
+  student_layers: [2, 4, 8, 12]
+  two_phase: true
