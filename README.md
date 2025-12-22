@@ -94,3 +94,23 @@ computational cost.
 All experiments were conducted in Google Colab.
 This repository archives final results and configuration details and
 provides code structure for reproducibility in a fresh environment.
+
+---
+
+## Knowledge Transfer Diagnostics
+
+We analyze the effectiveness of distillation by measuring the average
+Kullback–Leibler (KL) divergence between teacher and student output
+distributions on the Financial PhraseBank test set.
+
+Lower KL values indicate closer alignment with the teacher.
+
+| Model | Avg. KL (Teacher \|\| Student) |
+|------|-------------------------------|
+| Fresh → FP | 0.3418 |
+| CE-scraped → FP | 0.2334 |
+| KD-scraped → FP | 0.1427 |
+| **PKD-scraped → FP** | **0.1339** |
+
+PKD produces the closest alignment with FinBERT, confirming more effective
+knowledge transfer beyond hard-label supervision.
