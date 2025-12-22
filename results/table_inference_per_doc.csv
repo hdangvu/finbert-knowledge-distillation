@@ -1,0 +1,6 @@
+model,ms_per_doc,docs_per_second
+Fresh -> FP,2.02,495.2
+CE-scraped -> FP,2.06,485.5
+KD-scraped -> FP,2.04,490.8
+PKD-scraped -> FP,2.03,491.9
+FinBERT (Teacher),1.49,671.8

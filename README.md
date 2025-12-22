@@ -80,20 +80,16 @@ computational cost.
 
 ---
 
-## Repository Structure
+### Inference Throughput (Financial PhraseBank)
 
-- `notebooks/` — Original Colab notebook containing all experiments  
-- `assets/` — Figures and visualizations  
-- `results/` — Precomputed metrics and result tables  
-- `configs/` — Experiment configuration summaries  
+Despite being over 10× smaller, ALBERT-based students exhibit similar
+per-document inference latency across training strategies
+(~2.0 ms/doc, ~490 docs/s). Knowledge distillation improves predictive
+performance without affecting inference speed.
 
----
-
-## Note on Reproducibility
-
-All experiments were conducted in Google Colab.
-This repository archives final results and configuration details and
-provides code structure for reproducibility in a fresh environment.
+Interestingly, FinBERT achieves faster per-document inference
+(1.49 ms/doc, 671.8 docs/s), reflecting architectural and implementation
+optimizations in the teacher model rather than parameter count alone.
 
 ---
 
@@ -114,3 +110,20 @@ Lower KL values indicate closer alignment with the teacher.
 
 PKD produces the closest alignment with FinBERT, confirming more effective
 knowledge transfer beyond hard-label supervision.
+
+---
+
+## Repository Structure
+
+- `notebooks/` — Original Colab notebook containing all experiments  
+- `assets/` — Figures and visualizations  
+- `results/` — Precomputed metrics and result tables  
+- `configs/` — Experiment configuration summaries  
+
+---
+
+## Note on Reproducibility
+
+All experiments were conducted in Google Colab.
+This repository archives final results and configuration details and
+provides code structure for reproducibility in a fresh environment.
