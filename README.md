@@ -63,6 +63,30 @@ the `results/` directory for transparency and reuse.
 
 ---
 
+## Effect of Temperature in Knowledge Distillation
+
+We analyze the impact of the temperature parameter \(T\) in vanilla knowledge
+distillation, which controls the smoothness of the teacher’s soft-label
+distribution.
+
+Lower temperatures produce sharper distributions emphasizing confident teacher
+predictions, while higher temperatures overly smooth the distribution and reduce
+class discrimination.
+
+| Temperature (T) | Val Macro-F1 | Test Accuracy | Test Macro-F1 |
+|-----------------|--------------|---------------|---------------|
+| 2 | 0.9712 | 0.9588 | 0.9460 |
+| 5 | 0.9630 | 0.9647 | 0.9525 |
+| 9 | 0.9719 | 0.9588 | 0.9434 |
+
+Across all settings, vanilla KD consistently outperforms CE-only training.
+While \(T=2\) and \(T=9\) achieve slightly higher validation macro-F1, \(T=5\)
+yields the strongest test performance, achieving the highest test accuracy and
+macro-F1. Consequently, \(T=5\) is adopted as the default temperature in
+subsequent comparisons.
+
+---
+
 ## Confusion Matrix Analysis
 
 The figure below compares row-normalized confusion matrices on the
