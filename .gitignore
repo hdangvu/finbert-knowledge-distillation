@@ -1,5 +1,4 @@
-# data / models
-data/
+# models
 checkpoints/
 *.pt
 *.bin
@@ -19,3 +18,5 @@ runs/
 # Data (do not upload large/raw scraped content)
 data/raw/
 data/processed/
+
+.DS_Store
