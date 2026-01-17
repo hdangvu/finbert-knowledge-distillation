@@ -11,7 +11,8 @@ classification capability from a large **FinBERT** teacher model to a compact
 **Patient Knowledge Distillation (PKD)**.
 
 The goal is to achieve **near-teacher performance** while significantly reducing
-model size, enabling efficient deployment in resource-constrained settings.
+model size, enabling efficient deployment in resource-constrained and
+latency-sensitive settings common in financial NLP systems.
 
 ---
 
@@ -81,9 +82,8 @@ class discrimination.
 
 Across all settings, vanilla KD consistently outperforms CE-only training.
 While \(T=2\) and \(T=9\) achieve slightly higher validation macro-F1, \(T=5\)
-yields the strongest test performance, achieving the highest test accuracy and
-macro-F1. Consequently, \(T=5\) is adopted as the default temperature in
-subsequent comparisons.
+yields the strongest test performance. Consequently, \(T=5\) is adopted as the
+default temperature in subsequent comparisons.
 
 ---
 
@@ -124,6 +124,10 @@ Interestingly, FinBERT achieves faster per-document inference
 (1.49 ms/doc, 671.8 docs/s), reflecting architectural and implementation
 optimizations in the teacher model rather than parameter count alone.
 
+This makes distilled ALBERT models suitable for high-throughput or
+cost-sensitive environments where memory footprint matters more than
+single-document latency.
+
 ---
 
 ## Knowledge Transfer Diagnostics
@@ -146,18 +150,75 @@ knowledge transfer beyond hard-label supervision.
 
 ---
 
+## Data Engineering: News Ingestion and Storage
+
+In addition to model training and evaluation, the project includes a lightweight
+data engineering pipeline to collect and organize financial news data for
+downstream modeling.
+
+### Ingestion
+- Financial news articles are scraped programmatically using a custom Python
+  script (`scripts/ingest/scrape_news.py`) built with `requests` and
+  `BeautifulSoup`
+- The pipeline iterates over a predefined universe of equity tickers and
+  paginated news endpoints
+- Extracted fields include publication timestamp, ticker symbol, source,
+  headline, and article URL
+- Basic rate limiting is applied to reduce request bursts
+
+### Storage Layout
+The data directory follows a layered design:
+- `data/raw/`: full scraped output stored locally (excluded from git)
+- `data/processed/`: cleaned, model-ready data (excluded from git)
+- `data/sample/`: small, metadata-only public sample illustrating the schema
+
+To respect content licensing, the repository does not redistribute the full
+scraped article text publicly.
+
+### Text Preparation
+Text cleaning and preparation steps include:
+- lowercasing and whitespace normalization
+- removal of problematic unicode characters
+- concatenation of cleaned headline and summary fields into a single modeling
+  input
+
+This separation between ingestion, storage, and modeling mirrors real-world
+data pipelines used in financial NLP systems.
+
+---
+
 ## Repository Structure
 
 - `notebooks/` — Original Colab notebook containing all experiments  
+- `scripts/ingest/` — Data ingestion scripts for financial news scraping  
+- `data/sample/` — Public metadata-only sample illustrating data schema  
 - `assets/` — Figures and visualizations  
 - `results/` — Precomputed metrics and result tables  
 - `configs/` — Experiment configuration summaries  
 
 ---
 
+## Practical Applications
+
+The techniques explored in this project are directly applicable to real-world
+financial NLP systems, including:
+
+- **Market sentiment monitoring:** generating lightweight sentiment signals
+  from streaming financial news
+- **Risk and compliance tooling:** flagging negative or neutral sentiment shifts
+  under latency constraints
+- **Cost-efficient deployment:** replacing large transformer models with compact
+  distilled students in production pipelines
+
+By combining pseudo-labeling, knowledge distillation, and efficient
+architectures, the project demonstrates how high-capacity financial language
+models can be adapted for scalable, real-time use cases.
+
+---
+
 ## Note on Reproducibility
 
 The repository provides configuration summaries and result artifacts.
-Scripts for reproducing experiments can be added incrementally; the
-original end-to-end experimental pipeline is fully documented in
+Scripts for reproducing experiments can be added incrementally; the original
+end-to-end experimental pipeline is fully documented in
 `notebooks/pipeline.ipynb`.
