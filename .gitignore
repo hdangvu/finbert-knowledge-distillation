@@ -15,3 +15,7 @@ __pycache__/
 # logs
 wandb/
 runs/
+
+# Data (do not upload large/raw scraped content)
+data/raw/
+data/processed/
