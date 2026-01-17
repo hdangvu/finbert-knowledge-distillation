@@ -1,0 +1,5 @@
+model,avg_kl_teacher_student,dataset
+Fresh -> FP,0.3418,Financial PhraseBank (test)
+CE-scraped -> FP,0.2334,Financial PhraseBank (test)
+KD-scraped -> FP,0.1427,Financial PhraseBank (test)
+PKD-scraped -> FP,0.1339,Financial PhraseBank (test)

@@ -1,0 +1,3 @@
+model,tokenization_ms_per_64docs,forward_pass_ms_per_64docs
+ALBERT (student),8.34,149.46
+FinBERT (teacher),9.05,91.46
